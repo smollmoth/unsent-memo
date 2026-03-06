@@ -14,7 +14,6 @@
     --text: #1a1a1a;
     --text-muted: #999999;
     --text-light: #cccccc;
-    --red: #c0392b;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -35,25 +34,39 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 56px;
+    padding: 0 48px;
     height: 68px;
     flex-shrink: 0;
   }
   .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+  .logo-fallback {
+    display: none;
     font-family: 'Oswald', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text);
-    text-decoration: none;
   }
-  .nav-logo span { color: var(--red); }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
   .nav-link {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
     text-decoration: none;
@@ -61,7 +74,7 @@
   }
   .nav-link:hover { color: var(--text); }
 
-  /* PAGE CONTENT */
+  /* PAGE */
   .page {
     flex: 1;
     display: flex;
@@ -70,11 +83,11 @@
 
   /* LEFT PANEL */
   .left-panel {
-    width: 420px;
+    width: 400px;
     flex-shrink: 0;
     background: var(--text);
     color: #ffffff;
-    padding: 72px 56px;
+    padding: 72px 52px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -85,63 +98,52 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.35);
     margin-bottom: 24px;
   }
   .left-panel h1 {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(52px, 5vw, 80px);
+    font-size: clamp(52px, 5vw, 76px);
     font-weight: 700;
     line-height: 0.95;
     text-transform: uppercase;
     letter-spacing: -0.01em;
   }
-  .left-panel h1 em {
-    font-style: normal;
-    color: var(--red);
-  }
   .left-desc {
-    margin-top: 32px;
+    margin-top: 28px;
     font-family: 'Lato', sans-serif;
     font-size: 15px;
     line-height: 1.8;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.45);
   }
   .rules {
-    margin-top: 48px;
+    margin-top: 44px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
   .rule {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.35);
     line-height: 1.5;
   }
-  .rule-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--red);
-    flex-shrink: 0;
-    margin-top: 4px;
-  }
+  .rule-dash { opacity: 0.4; }
   .left-bottom {
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.2);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  /* RIGHT PANEL - FORM */
+  /* RIGHT PANEL */
   .right-panel {
     flex: 1;
     padding: 72px 64px;
@@ -152,21 +154,19 @@
   }
   .form-heading {
     font-family: 'Oswald', sans-serif;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .form-subheading {
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
     color: var(--text-muted);
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
-  .form-group {
-    margin-bottom: 24px;
-  }
+  .form-group { margin-bottom: 22px; }
   .form-label {
     display: block;
     font-family: 'Poppins', sans-serif;
@@ -184,7 +184,7 @@
     letter-spacing: 0;
     font-size: 11px;
   }
-  textarea, input[type="text"], select {
+  textarea, input[type="text"] {
     width: 100%;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -194,15 +194,15 @@
     line-height: 1.7;
     padding: 14px 16px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
     -webkit-appearance: none;
   }
-  textarea:focus, input[type="text"]:focus, select:focus {
+  textarea:focus, input[type="text"]:focus {
     border-color: var(--text);
     background: #fff;
   }
   textarea {
-    min-height: 160px;
+    min-height: 150px;
     resize: vertical;
     font-size: 16px;
     line-height: 1.8;
@@ -211,8 +211,6 @@
     color: var(--text-light);
     font-style: italic;
   }
-  select { cursor: pointer; height: 50px; }
-  select option { background: #fff; }
   .char-count {
     text-align: right;
     font-family: 'Poppins', sans-serif;
@@ -220,43 +218,74 @@
     color: var(--text-light);
     margin-top: 6px;
   }
-  .char-count.warn { color: var(--red); }
+  .char-count.warn { color: #c0392b; }
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
-  .color-swatches {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+  .field-error {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: #c0392b;
+    margin-top: 6px;
+    display: none;
   }
-  .swatch {
-    width: 40px;
-    height: 40px;
+
+  /* COLOR PICKER */
+  .color-picker {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .color-swatch {
+    width: 38px;
+    height: 38px;
     cursor: pointer;
     border: 3px solid transparent;
-    transition: transform 0.15s, border-color 0.15s;
+    outline: 3px solid transparent;
+    transition: transform 0.15s, outline-color 0.15s;
     position: relative;
     flex-shrink: 0;
   }
-  .swatch:hover { transform: scale(1.08); }
-  .swatch.active {
-    border-color: var(--text);
+  .color-swatch:hover { transform: scale(1.1); }
+  .color-swatch.selected {
+    outline-color: var(--text);
+    outline-offset: 2px;
     transform: scale(1.12);
   }
-  .swatch.active::after {
+  .color-swatch.selected::after {
     content: '✓';
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    font-weight: 700;
   }
+
+  /* PREVIEW */
+  .card-preview {
+    margin-top: 16px;
+    padding: 20px 22px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    transition: background 0.2s, color 0.2s;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  .preview-text {
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  /* ACTIONS */
   .form-actions {
-    margin-top: 32px;
+    margin-top: 28px;
     display: flex;
     align-items: center;
     gap: 24px;
@@ -284,24 +313,14 @@
     text-transform: uppercase;
     line-height: 1.6;
   }
-  .field-error {
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    color: var(--red);
-    margin-top: 6px;
-    display: none;
-  }
 
-  /* SUCCESS STATE */
+  /* SUCCESS */
   .success-state {
     display: none;
     text-align: center;
     padding: 40px 0;
   }
-  .success-icon {
-    font-size: 48px;
-    margin-bottom: 24px;
-  }
+  .success-icon { font-size: 48px; margin-bottom: 24px; }
   .success-state h2 {
     font-family: 'Oswald', sans-serif;
     font-size: 36px;
@@ -345,25 +364,31 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">UNSENT<span>.</span>MEMO</a>
-  <a class="nav-link" href="index.html">&larr; Read the archive</a>
+  <a class="nav-logo" href="index.html">
+    <img src="logo.png" alt="Unsent Memo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-fallback">UNSENT MEMO</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="index.html">Archive</a>
+    <a class="nav-link" href="privacy.html">Privacy</a>
+  </div>
 </nav>
 
 <div class="page">
   <!-- LEFT PANEL -->
   <div class="left-panel">
     <div>
-      <div class="left-tag">// Submit a memo</div>
-      <h1>Say what<br>you<br><em>couldn't.</em></h1>
+      <div class="left-tag">Submit a memo</div>
+      <h1>Say what<br>you<br>couldn't.</h1>
       <p class="left-desc">No name. No email. No footprint. Write the message you've been holding onto. It lives here anonymously, with everyone else who held back.</p>
       <div class="rules">
-        <div class="rule"><span class="rule-dot"></span>Zero personal data collected</div>
-        <div class="rule"><span class="rule-dot"></span>Reviewed before publishing</div>
-        <div class="rule"><span class="rule-dot"></span>No hate speech or personal attacks</div>
-        <div class="rule"><span class="rule-dot"></span>Company name used only for filtering</div>
+        <div class="rule"><span class="rule-dash">—</span>Zero personal data collected</div>
+        <div class="rule"><span class="rule-dash">—</span>Reviewed before publishing</div>
+        <div class="rule"><span class="rule-dash">—</span>No hate speech or personal attacks</div>
+        <div class="rule"><span class="rule-dash">—</span>Company name is optional</div>
       </div>
     </div>
-    <div class="left-bottom">Anonymous &middot; Permanent &middot; Real</div>
+    <div class="left-bottom">Anonymous · Permanent · Real</div>
   </div>
 
   <!-- RIGHT PANEL -->
@@ -374,7 +399,7 @@
 
       <div class="form-group">
         <label class="form-label">The message</label>
-        <textarea id="msgText" placeholder="I never told you that..." maxlength="600" oninput="updateCount()"></textarea>
+        <textarea id="msgText" placeholder="I never told you that..." maxlength="600" oninput="updateCount(); updatePreview()"></textarea>
         <div class="char-count" id="charCount">0 / 600</div>
         <div class="field-error" id="msgError">Please write at least 20 characters.</div>
       </div>
@@ -386,23 +411,19 @@
           <div class="field-error" id="toError">Please fill this in.</div>
         </div>
         <div class="form-group">
-          <label class="form-label">Company <span>(optional — helps with filtering)</span></label>
+          <label class="form-label">Company <span>(optional)</span></label>
           <input type="text" id="msgCompany" placeholder="e.g. Google, Acme Corp" maxlength="80" />
         </div>
       </div>
 
       <div class="form-group">
-        <label class="form-label">Mood behind it</label>
-        <select id="msgMood">
-          <option value="frustrated">Frustrated</option>
-          <option value="grateful">Grateful</option>
-          <option value="burnt-out">Burnt out</option>
-          <option value="hopeful">Hopeful</option>
-          <option value="proud">Proud</option>
-          <option value="conflicted">Conflicted</option>
-          <option value="relieved">Relieved</option>
-          <option value="resigned">Resigned</option>
-        </select>
+        <label class="form-label">Card colour</label>
+        <div class="color-picker" id="colorPicker">
+          <!-- swatches injected by JS -->
+        </div>
+        <div class="card-preview" id="cardPreview">
+          <span class="preview-text">Your memo will look like this.</span>
+        </div>
       </div>
 
       <div class="form-actions">
@@ -422,6 +443,74 @@
 </div>
 
 <script>
+const CARD_COLORS = [
+  { name: 'Cobalt',     hex: '#1438BD' },
+  { name: 'Red',        hex: '#C1121F' },
+  { name: 'Forest',     hex: '#2D6A4F' },
+  { name: 'Plum',       hex: '#6B2D8B' },
+  { name: 'Slate',      hex: '#2B2D42' },
+  { name: 'Tangerine',  hex: '#E76F51' },
+  { name: 'Teal',       hex: '#0A7373' },
+  { name: 'Burgundy',   hex: '#7D2239' },
+  { name: 'Noir',       hex: '#1A1A1A' },
+  { name: 'Olive',      hex: '#606C38' },
+  { name: 'Saffron',    hex: '#D4A017' },
+  { name: 'Navy',       hex: '#0D1B2A' },
+];
+
+let selectedColor = CARD_COLORS[0].hex;
+
+function getTextColor(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return luminance > 0.45 ? '#1a1a1a' : '#ffffff';
+}
+
+function buildSwatches() {
+  const picker = document.getElementById('colorPicker');
+  picker.innerHTML = CARD_COLORS.map((c, i) => `
+    <div class="color-swatch${i===0?' selected':''}"
+         style="background:${c.hex}"
+         title="${c.name}"
+         onclick="selectColor('${c.hex}', this)">
+    </div>
+  `).join('');
+  updatePreview();
+}
+
+function selectColor(hex, el) {
+  document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedColor = hex;
+  // set check colour
+  const fg = getTextColor(hex);
+  el.style.setProperty('--check', fg);
+  updatePreview();
+}
+
+// dynamic ::after color via inline style workaround
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.color-swatch').forEach(s => {
+    s.addEventListener('click', function() {
+      const fg = getTextColor(selectedColor);
+      this.style.color = fg;
+    });
+  });
+});
+
+function updatePreview() {
+  const preview = document.getElementById('cardPreview');
+  const text = document.getElementById('msgText').value.trim();
+  const fg = getTextColor(selectedColor);
+  preview.style.background = selectedColor;
+  preview.style.color = fg;
+  preview.innerHTML = text
+    ? `<span>${escHtml(text.slice(0,120))}${text.length>120?'…':''}</span>`
+    : `<span style="opacity:0.5;font-style:italic">Your memo will look like this.</span>`;
+}
+
 function updateCount() {
   const len = document.getElementById('msgText').value.length;
   const el = document.getElementById('charCount');
@@ -430,15 +519,13 @@ function updateCount() {
 }
 
 function submitMemo() {
-  const text = document.getElementById('msgText').value.trim();
-  const to = document.getElementById('msgTo').value.trim();
+  const text    = document.getElementById('msgText').value.trim();
+  const to      = document.getElementById('msgTo').value.trim();
   const company = document.getElementById('msgCompany').value.trim();
-  const mood = document.getElementById('msgMood').value;
 
   let valid = true;
-
   document.getElementById('msgError').style.display = 'none';
-  document.getElementById('toError').style.display = 'none';
+  document.getElementById('toError').style.display  = 'none';
 
   if (text.length < 20) {
     document.getElementById('msgError').style.display = 'block';
@@ -455,15 +542,23 @@ function submitMemo() {
     id: Date.now(),
     text,
     to,
-    company: company || 'Anonymous Company',
-    mood,
+    company: company || 'Anonymous',
+    color: selectedColor,
     submittedAt: new Date().toISOString()
   });
   localStorage.setItem('unsent_pending', JSON.stringify(pending));
 
-  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('formWrap').style.display   = 'none';
   document.getElementById('successState').style.display = 'block';
 }
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+buildSwatches();
 </script>
 </body>
 </html>

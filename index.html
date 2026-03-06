@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unsent Memo — Corporate Confessions Archive</title>
+<title>Unsent Memo — Say what you couldn't at work</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -14,7 +14,6 @@
     --text: #1a1a1a;
     --text-muted: #999999;
     --text-light: #cccccc;
-    --accent: #1a1a1a;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -36,19 +35,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 56px;
+    padding: 0 48px;
     height: 68px;
   }
   .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+  .logo-fallback {
+    display: none;
     font-family: 'Oswald', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text);
-    text-decoration: none;
   }
-  .nav-logo span { color: #c0392b; }
   .nav-right {
     display: flex;
     align-items: center;
@@ -58,7 +67,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
     text-decoration: none;
@@ -69,7 +78,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     background: var(--text);
     color: #ffffff;
@@ -81,80 +90,53 @@
 
   /* HERO */
   .hero {
-    padding: 88px 56px 64px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-  }
-  .hero-tag {
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 20px;
+    padding: 80px 48px 56px;
+    text-align: center;
+    border-bottom: 2px solid var(--text);
   }
   .hero h1 {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(56px, 7vw, 100px);
+    font-size: clamp(64px, 10vw, 140px);
     font-weight: 700;
-    line-height: 0.95;
+    line-height: 0.92;
     text-transform: uppercase;
     letter-spacing: -0.01em;
-    max-width: 800px;
-  }
-  .hero h1 em {
-    font-style: normal;
-    color: #c0392b;
-  }
-  .hero-sub {
-    margin-top: 28px;
-    font-family: 'Lato', sans-serif;
-    font-size: 17px;
-    line-height: 1.75;
-    color: var(--text-muted);
-    max-width: 520px;
-  }
-  .hero-stats {
-    display: flex;
-    gap: 48px;
-    margin-top: 48px;
-  }
-  .hero-stat-num {
-    font-family: 'Oswald', sans-serif;
-    font-size: 40px;
-    font-weight: 700;
-    line-height: 1;
     color: var(--text);
   }
-  .hero-stat-label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .hero-sub {
+    margin-top: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 300;
     color: var(--text-muted);
-    margin-top: 6px;
+    letter-spacing: 0.04em;
   }
 
-  /* SEARCH + FILTER BAR */
-  .filter-section {
-    padding: 24px 56px;
-    border-bottom: 1px solid var(--border);
-    background: #ffffff;
-    position: sticky;
-    top: 68px;
-    z-index: 50;
+  /* ARCHIVE */
+  .archive {
+    padding: 48px 48px 80px;
+  }
+  .archive-top {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 36px;
     gap: 20px;
     flex-wrap: wrap;
+  }
+  .archive-count {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
   .search-wrap {
     position: relative;
     flex: 1;
-    min-width: 240px;
-    max-width: 400px;
+    max-width: 360px;
   }
   .search-icon {
     position: absolute;
@@ -162,12 +144,12 @@
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
-    font-size: 15px;
+    font-size: 14px;
     pointer-events: none;
   }
   .search-input {
     width: 100%;
-    padding: 12px 16px 12px 40px;
+    padding: 11px 16px 11px 38px;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
     border: 1px solid var(--border);
@@ -177,150 +159,70 @@
     transition: border-color 0.2s;
   }
   .search-input::placeholder { color: var(--text-light); }
-  .search-input:focus { border-color: var(--text); }
-  .filter-sep {
-    width: 1px;
-    height: 24px;
-    background: var(--border);
-    flex-shrink: 0;
-  }
-  .mood-filters {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .chip {
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-  }
-  .chip:hover { border-color: var(--text); color: var(--text); }
-  .chip.active { background: var(--text); color: #fff; border-color: var(--text); }
-  .chip-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .search-input:focus { border-color: var(--text); background: #fff; }
 
-  /* ARCHIVE */
-  .archive {
-    padding: 48px 56px 80px;
-  }
-  .archive-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 32px;
-  }
-  .archive-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 28px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .archive-count {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-  }
+  /* GRID */
   .notes-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
   }
-  @media (max-width: 1200px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 700px) { .notes-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1100px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px)  { .notes-grid { grid-template-columns: 1fr; } }
 
   /* NOTE CARD */
   .note-card {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-top: 5px solid #ccc;
-    padding: 28px 28px 22px;
+    padding: 28px 28px 24px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
     display: flex;
     flex-direction: column;
+    min-height: 200px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+  .note-card:nth-child(4n+1) { transform: rotate(-1.2deg); }
+  .note-card:nth-child(4n+2) { transform: rotate(0.9deg); }
+  .note-card:nth-child(4n+3) { transform: rotate(-0.6deg); }
+  .note-card:nth-child(4n)   { transform: rotate(1.1deg); }
   .note-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.10);
-  }
-  .note-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border);
+    transform: rotate(0deg) translateY(-6px) !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    z-index: 2;
   }
   .note-to {
     font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .note-to strong {
-    color: var(--text);
-    font-weight: 600;
-  }
-  .mood-badge {
-    font-family: 'Poppins', sans-serif;
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 2px;
-    color: #fff;
-    flex-shrink: 0;
+    opacity: 0.55;
+    margin-bottom: 14px;
   }
   .note-text {
     font-family: 'Lato', sans-serif;
     font-size: 16px;
-    line-height: 1.85;
-    color: #2a2a2a;
+    line-height: 1.75;
     flex: 1;
     word-break: break-word;
   }
   .note-footer {
     margin-top: 20px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    opacity: 0.45;
   }
-  .company-badge {
+  .company-label {
     font-family: 'Poppins', sans-serif;
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: var(--surface);
-    color: var(--text-muted);
-    padding: 3px 10px;
-    border: 1px solid var(--border);
   }
-  .note-anon {
+  .anon-label {
     font-family: 'Poppins', sans-serif;
     font-size: 10px;
-    color: var(--text-light);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
@@ -342,7 +244,7 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.65);
     z-index: 200;
     align-items: center;
     justify-content: center;
@@ -350,15 +252,15 @@
   }
   .modal-overlay.open { display: flex; }
   .modal {
-    background: #fff;
     max-width: 560px;
     width: 100%;
     padding: 0;
     position: relative;
     animation: scaleIn 0.2s ease;
-    border-top: 6px solid #ccc;
   }
-  .modal-inner { padding: 40px 40px 32px; }
+  .modal-inner {
+    padding: 40px 40px 32px;
+  }
   .modal-close {
     position: absolute;
     top: 14px; right: 18px;
@@ -370,138 +272,107 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     cursor: pointer;
-    color: var(--text-muted);
-    transition: color 0.15s;
+    opacity: 0.5;
+    transition: opacity 0.15s;
   }
-  .modal-close:hover { color: var(--text); }
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
+  .modal-close:hover { opacity: 1; }
   .modal-to {
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    opacity: 0.55;
+    margin-bottom: 20px;
   }
   .modal-text {
     font-family: 'Lato', sans-serif;
-    font-size: 18px;
-    line-height: 1.9;
-    color: var(--text);
+    font-size: 19px;
+    line-height: 1.85;
   }
   .modal-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 24px;
+    margin-top: 28px;
     padding-top: 16px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(0,0,0,0.12);
+    opacity: 0.5;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   /* FOOTER */
   footer {
-    padding: 28px 56px;
-    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    border-top: 2px solid var(--text);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    background: var(--surface);
+    gap: 32px;
+    flex-wrap: wrap;
   }
-  .footer-logo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .footer-logo span { color: #c0392b; }
-  .footer-right {
+  .footer-copy {
     font-family: 'Poppins', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
+  .footer-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--text); }
 
   @keyframes scaleIn {
     from { opacity: 0; transform: scale(0.97) translateY(8px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
   }
 
   @media (max-width: 768px) {
     nav { padding: 0 20px; }
-    .hero { padding: 56px 20px 48px; }
-    .filter-section { padding: 16px 20px; }
+    .hero { padding: 56px 20px 40px; }
     .archive { padding: 32px 20px 56px; }
-    footer { padding: 20px; flex-direction: column; gap: 10px; text-align: center; }
+    footer { padding: 24px 20px; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">UNSENT<span>.</span>MEMO</a>
+  <a class="nav-logo" href="index.html">
+    <img src="logo.png" alt="Unsent Memo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-fallback">UNSENT MEMO</span>
+  </a>
   <div class="nav-right">
-    <a class="nav-link" href="admin.html">Admin</a>
-    <a class="btn-nav" href="submit.html">Submit a Memo</a>
+    <a class="nav-link" href="index.html">Archive</a>
+    <a class="nav-link" href="#" onclick="focusSearch(event)">Search</a>
+    <a class="nav-link" href="privacy.html">Privacy</a>
+    <a class="btn-nav" href="submit.html">Submit</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">The corporate confession archive</div>
-  <h1>Things you<br><em>never</em> said.</h1>
-  <p class="hero-sub">Every workplace has a graveyard of unsent messages. The feedback that stayed in your head. The email you deleted three times. This is where they finally go.</p>
-  <div class="hero-stats">
-    <div>
-      <div class="hero-stat-num" id="totalCount">0</div>
-      <div class="hero-stat-label">Memos in archive</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">100%</div>
-      <div class="hero-stat-label">Anonymous</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">0</div>
-      <div class="hero-stat-label">Data collected</div>
-    </div>
-  </div>
+  <h1>Unsent Memo</h1>
+  <p class="hero-sub">Say what you couldn't at work</p>
 </section>
-
-<!-- FILTER BAR -->
-<div class="filter-section">
-  <div class="search-wrap">
-    <span class="search-icon">&#128269;</span>
-    <input class="search-input" id="searchInput" type="text" placeholder="Search by company or person..." oninput="render()" />
-  </div>
-  <div class="filter-sep"></div>
-  <div class="mood-filters" id="moodFilters">
-    <button class="chip active" onclick="setMood(this,'all')">All moods</button>
-    <button class="chip" onclick="setMood(this,'frustrated')"><span class="chip-dot" style="background:#c0392b"></span>Frustrated</button>
-    <button class="chip" onclick="setMood(this,'grateful')"><span class="chip-dot" style="background:#27ae60"></span>Grateful</button>
-    <button class="chip" onclick="setMood(this,'burnt-out')"><span class="chip-dot" style="background:#7f8c8d"></span>Burnt out</button>
-    <button class="chip" onclick="setMood(this,'hopeful')"><span class="chip-dot" style="background:#e67e22"></span>Hopeful</button>
-    <button class="chip" onclick="setMood(this,'proud')"><span class="chip-dot" style="background:#8e44ad"></span>Proud</button>
-    <button class="chip" onclick="setMood(this,'conflicted')"><span class="chip-dot" style="background:#d35400"></span>Conflicted</button>
-  </div>
-</div>
 
 <!-- ARCHIVE -->
 <section class="archive">
-  <div class="archive-header">
-    <div class="archive-title">Archive</div>
+  <div class="archive-top">
     <div class="archive-count" id="visibleCount"></div>
+    <div class="search-wrap">
+      <span class="search-icon">&#128269;</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search by company or person..." oninput="render()" />
+    </div>
   </div>
   <div class="notes-grid" id="notesGrid">
     <div class="empty-state" id="emptyState">No memos match your search.</div>
@@ -509,8 +380,8 @@
 </section>
 
 <footer>
-  <div class="footer-logo">UNSENT<span>.</span>MEMO</div>
-  <div class="footer-right">Anonymous &middot; No data collected &middot; <a href="submit.html" style="color:inherit;">Submit a memo</a></div>
+  <span class="footer-copy">© Muskan Singh (2026)</span>
+  <a class="footer-link" href="privacy.html">Privacy policy</a>
 </footer>
 
 <!-- MODAL -->
@@ -518,66 +389,63 @@
   <div class="modal" id="modal">
     <div class="modal-inner">
       <button class="modal-close" onclick="closeModal()">Close &times;</button>
-      <div class="modal-header">
-        <div class="modal-to" id="mTo"></div>
-        <div class="mood-badge" id="mMood"></div>
-      </div>
+      <div class="modal-to" id="mTo"></div>
       <div class="modal-text" id="mText"></div>
       <div class="modal-footer">
-        <div class="company-badge" id="mCompany"></div>
-        <div class="note-anon">Anonymous</div>
+        <span id="mCompany"></span>
+        <span>Anonymous</span>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-const MOOD_COLORS = {
-  frustrated: '#c0392b',
-  grateful: '#27ae60',
-  'burnt-out': '#7f8c8d',
-  hopeful: '#e67e22',
-  proud: '#8e44ad',
-  conflicted: '#d35400',
-  relieved: '#2980b9',
-  resigned: '#95a5a6'
-};
-
-const SEED = [
-  { text:"You asked for feedback but punished everyone who gave it. I stopped being honest after the third person got reassigned.", to:"My Manager", company:"Acme Corp", mood:"frustrated" },
-  { text:"You went to bat for me when I didn't even know I needed it. I got that promotion because you said something in a room I wasn't in. Thank you.", to:"My Manager", company:"Stripe", mood:"grateful" },
-  { text:"I haven't taken a real day off in nine months. I reply to Slack on weekends. I wake up anxious. And you just sent a 7am Monday invite.", to:"HR", company:"Meta", mood:"burnt-out" },
-  { text:"Every idea I brought to you ended up in your mouth in the next all-hands. No credit. No mention. I watched you get promoted on the back of my work.", to:"The CEO", company:"Acme Corp", mood:"frustrated" },
-  { text:"I don't think you realize how much calmer everyone is when you're out of the office. That's not a compliment.", to:"My Manager", company:"Goldman Sachs", mood:"frustrated" },
-  { text:"When I was falling apart after my dad died, you covered for me without making it a big deal. You just said 'take what you need.' I've never forgotten that.", to:"Sarah from Finance", company:"Shopify", mood:"grateful" },
-  { text:"I've been quietly applying for other jobs for four months. I feel guilty but mostly I feel relieved every time I get a callback.", to:"Myself", company:"McKinsey", mood:"conflicted" },
-  { text:"I still think the idea I pitched in Q2 was better than what we actually built. The data proved it six months later. Nobody ever said anything.", to:"My Team", company:"Spotify", mood:"proud" },
-  { text:"I cried in the bathroom after that feedback session. Not because you were wrong. Because you were right and I wasn't ready to hear it in front of everyone.", to:"My Manager", company:"Deloitte", mood:"conflicted" },
-  { text:"You gave me a shot when my CV shouldn't have made the shortlist. I've been trying to justify that decision every single day since.", to:"The CEO", company:"Stripe", mood:"hopeful" },
-  { text:"The 'open door policy' was never open. Every time someone walked through it, something bad happened to them. That door was a trap.", to:"HR", company:"Uber", mood:"frustrated" },
-  { text:"I told myself I'd speak up in the next meeting. I've told myself that 47 times. I'm still waiting for the right moment.", to:"Myself", company:"Amazon", mood:"burnt-out" },
-  { text:"You quietly mentored me for two years without calling it that. You answered my dumb questions at 9pm. You made me a better engineer.", to:"David K.", company:"Notion", mood:"grateful" },
-  { text:"The culture deck says we value work-life balance. The culture deck is fiction.", to:"The CEO", company:"WeWork", mood:"burnt-out" },
-  { text:"I actually love this job. I don't say that because I'm afraid it'll disappear. I come home excited. I don't take that for granted.", to:"Myself", company:"Basecamp", mood:"hopeful" },
-  { text:"You fired someone two days before their stock vested. Everyone saw it. Nobody believed it was a coincidence. We just couldn't prove it.", to:"The CEO", company:"Acme Corp", mood:"frustrated" }
+const DEFAULT_COLORS = [
+  '#1438BD','#C1121F','#2D6A4F','#6B2D8B',
+  '#2B2D42','#E76F51','#0A7373','#7D2239',
+  '#1A1A1A','#386641'
 ];
 
-let filterMood = 'all';
+const SEED = [
+  { text:"You asked for feedback but punished everyone who gave it. I stopped being honest after the third person got reassigned.", to:"My Manager", company:"Acme Corp", color:"#C1121F" },
+  { text:"You went to bat for me when I didn't even know I needed it. I got that promotion because you said something in a room I wasn't in. Thank you.", to:"My Manager", company:"Stripe", color:"#2D6A4F" },
+  { text:"I haven't taken a real day off in nine months. I reply to Slack on weekends. I wake up anxious. And you just sent a 7am Monday invite.", to:"HR", company:"Meta", color:"#2B2D42" },
+  { text:"Every idea I brought to you ended up in your mouth in the next all-hands. No credit. No mention. I watched you get promoted on the back of my work.", to:"The CEO", company:"Acme Corp", color:"#1438BD" },
+  { text:"I don't think you realize how much calmer everyone is when you're out of the office. That's not a compliment.", to:"My Manager", company:"Goldman Sachs", color:"#6B2D8B" },
+  { text:"When I was falling apart after my dad died, you covered for me without making it a big deal. You just said 'take what you need.' I've never forgotten that.", to:"Sarah from Finance", company:"Shopify", color:"#0A7373" },
+  { text:"I've been quietly applying for other jobs for four months. I feel guilty but mostly I feel relieved every time I get a callback.", to:"Myself", company:"McKinsey", color:"#7D2239" },
+  { text:"I still think the idea I pitched in Q2 was better than what we actually built. The data proved it six months later. Nobody ever said anything.", to:"My Team", company:"Spotify", color:"#1438BD" },
+  { text:"I cried in the bathroom after that feedback session. Not because you were wrong. Because you were right and I wasn't ready to hear it in front of everyone.", to:"My Manager", company:"Deloitte", color:"#E76F51" },
+  { text:"You gave me a shot when my CV shouldn't have made the shortlist. I've been trying to justify that decision every single day since.", to:"The CEO", company:"Stripe", color:"#386641" },
+  { text:"The 'open door policy' was never open. Every time someone walked through it, something bad happened to them. That door was a trap.", to:"HR", company:"Uber", color:"#C1121F" },
+  { text:"I told myself I'd speak up in the next meeting. I've told myself that 47 times. I'm still waiting for the right moment.", to:"Myself", company:"Amazon", color:"#2B2D42" },
+  { text:"You quietly mentored me for two years without calling it that. You answered my dumb questions at 9pm. You made me a better engineer.", to:"David K.", company:"Notion", color:"#0A7373" },
+  { text:"The culture deck says we value work-life balance. The culture deck is fiction.", to:"The CEO", company:"WeWork", color:"#6B2D8B" },
+  { text:"I actually love this job. I don't say that because I'm afraid it'll disappear. I come home excited. I don't take that for granted.", to:"Myself", company:"Basecamp", color:"#2D6A4F" },
+  { text:"You fired someone two days before their stock vested. Everyone saw it. Nobody believed it was a coincidence. We just couldn't prove it.", to:"The CEO", company:"Acme Corp", color:"#7D2239" }
+];
+
 let allMessages = [];
 
-function initMessages() {
-  if (!localStorage.getItem('unsent_seeded')) {
-    localStorage.setItem('unsent_approved', JSON.stringify(SEED));
-    localStorage.setItem('unsent_seeded', '1');
-  }
-  allMessages = JSON.parse(localStorage.getItem('unsent_approved') || '[]');
+function getTextColor(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return luminance > 0.45 ? '#1a1a1a' : '#ffffff';
 }
 
-function setMood(el, mood) {
-  document.querySelectorAll('#moodFilters .chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  filterMood = mood;
-  render();
+function initMessages() {
+  if (!localStorage.getItem('unsent_seeded_v2')) {
+    localStorage.setItem('unsent_approved', JSON.stringify(SEED));
+    localStorage.setItem('unsent_seeded_v2', '1');
+  }
+  allMessages = JSON.parse(localStorage.getItem('unsent_approved') || '[]');
+  // Migrate old entries without color
+  allMessages = allMessages.map((m, i) => ({
+    ...m,
+    color: m.color || DEFAULT_COLORS[i % DEFAULT_COLORS.length]
+  }));
 }
 
 function render() {
@@ -586,15 +454,14 @@ function render() {
   const empty = document.getElementById('emptyState');
 
   const filtered = allMessages.filter(m => {
-    const matchMood = filterMood === 'all' || m.mood === filterMood;
-    const matchSearch = !query ||
+    return !query ||
       (m.company || '').toLowerCase().includes(query) ||
-      (m.to || '').toLowerCase().includes(query);
-    return matchMood && matchSearch;
+      (m.to || '').toLowerCase().includes(query) ||
+      (m.text || '').toLowerCase().includes(query);
   });
 
-  document.getElementById('totalCount').textContent = allMessages.length;
-  document.getElementById('visibleCount').textContent = `${filtered.length} memo${filtered.length !== 1 ? 's' : ''}`;
+  document.getElementById('visibleCount').textContent =
+    `${filtered.length} memo${filtered.length !== 1 ? 's' : ''}`;
 
   if (!filtered.length) {
     grid.innerHTML = '';
@@ -605,18 +472,16 @@ function render() {
   empty.style.display = 'none';
 
   grid.innerHTML = filtered.map((m, i) => {
-    const color = MOOD_COLORS[m.mood] || '#aaa';
+    const bg = m.color || DEFAULT_COLORS[i % DEFAULT_COLORS.length];
+    const fg = getTextColor(bg);
     const idx = allMessages.indexOf(m);
-    const preview = m.text.length > 260 ? m.text.slice(0, 260) + '…' : m.text;
-    return `<div class="note-card" style="border-top-color:${color}" onclick="openModal(${idx})">
-      <div class="note-header">
-        <div class="note-to">To: <strong>${escHtml(m.to)}</strong></div>
-        <div class="mood-badge" style="background:${color}">${m.mood}</div>
-      </div>
+    const preview = m.text.length > 280 ? m.text.slice(0, 280) + '…' : m.text;
+    return `<div class="note-card" style="background:${bg};color:${fg}" onclick="openModal(${idx})">
+      <div class="note-to">To: ${escHtml(m.to)}</div>
       <div class="note-text">${escHtml(preview)}</div>
       <div class="note-footer">
-        <div class="company-badge">${escHtml(m.company || 'Anonymous Company')}</div>
-        <div class="note-anon">Anonymous</div>
+        <span class="company-label">${escHtml(m.company || 'Anonymous')}</span>
+        <span class="anon-label">Anonymous</span>
       </div>
     </div>`;
   }).join('');
@@ -624,13 +489,14 @@ function render() {
 
 function openModal(idx) {
   const m = allMessages[idx];
-  const color = MOOD_COLORS[m.mood] || '#aaa';
-  document.getElementById('modal').style.borderTopColor = color;
+  const bg = m.color || '#1a1a1a';
+  const fg = getTextColor(bg);
+  const modal = document.getElementById('modal');
+  modal.style.background = bg;
+  modal.style.color = fg;
   document.getElementById('mTo').textContent = `To: ${m.to}`;
-  document.getElementById('mMood').textContent = m.mood;
-  document.getElementById('mMood').style.background = color;
   document.getElementById('mText').textContent = m.text;
-  document.getElementById('mCompany').textContent = m.company || 'Anonymous Company';
+  document.getElementById('mCompany').textContent = m.company || 'Anonymous';
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -642,8 +508,16 @@ function closeModal() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+function focusSearch(e) {
+  e.preventDefault();
+  document.getElementById('searchInput').focus();
+  document.getElementById('searchInput').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 function escHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 initMessages();
