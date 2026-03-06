@@ -5,459 +5,312 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Unsent Memo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f7f6f3;
-    --surface: #ffffff;
+    --white: #ffffff;
     --border: #e8e8e4;
     --text: #1a1a1a;
-    --text-muted: #999999;
-    --text-light: #cccccc;
-    --red: #c0392b;
-    --green: #27ae60;
+    --muted: #999;
+    --light: #ccc;
+    --green: #2D6A4F;
+    --red: #C1121F;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Lato', sans-serif;
-    min-height: 100vh;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'Lato', sans-serif; min-height: 100vh; }
 
-  /* LOGIN SCREEN */
+  /* LOGIN */
   .login-screen {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--text);
     padding: 24px;
   }
   .login-box {
-    background: #ffffff;
+    background: var(--white);
     padding: 56px 48px;
-    max-width: 400px;
     width: 100%;
-    text-align: center;
+    max-width: 420px;
+    border-top: 4px solid var(--text);
   }
-  .login-logo {
+  .login-title {
     font-family: 'Oswald', sans-serif;
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 700;
-    letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
   }
-  .login-logo span { color: var(--red); }
   .login-sub {
     font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 40px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    letter-spacing: 0.04em;
   }
-  .login-label {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-align: left;
-    margin-bottom: 10px;
-  }
-  .login-input {
+  .login-box input {
     width: 100%;
+    padding: 14px 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
     border: 1px solid var(--border);
     background: var(--bg);
     color: var(--text);
-    font-family: 'Lato', sans-serif;
-    font-size: 20px;
-    letter-spacing: 0.3em;
-    text-align: center;
-    padding: 14px;
     outline: none;
     margin-bottom: 16px;
     transition: border-color 0.2s;
   }
-  .login-input:focus { border-color: var(--text); }
-  .login-input.error { border-color: var(--red); }
-  .login-error {
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    color: var(--red);
-    margin-bottom: 16px;
-    display: none;
-  }
-  .btn-login {
+  .login-box input:focus { border-color: var(--text); background: #fff; }
+  .login-box button {
     width: 100%;
+    padding: 15px;
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     background: var(--text);
     color: #fff;
     border: none;
-    padding: 14px;
     cursor: pointer;
     transition: background 0.18s;
   }
-  .btn-login:hover { background: #333; }
+  .login-box button:hover { background: #333; }
+  .login-box button:disabled { background: var(--light); cursor: not-allowed; }
+  .login-error {
+    color: var(--red);
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    margin-top: 12px;
+    display: none;
+  }
 
-  /* DASHBOARD */
-  .dashboard { display: none; }
-  nav {
-    background: #ffffff;
-    border-bottom: 1px solid var(--border);
+  /* ADMIN PANEL */
+  .admin-panel { display: none; }
+
+  .admin-nav {
+    background: var(--text);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 48px;
-    height: 68px;
+    height: 60px;
   }
-  .nav-logo {
+  .admin-nav-title {
     font-family: 'Oswald', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text);
-    text-decoration: none;
   }
-  .nav-logo span { color: var(--red); }
-  .nav-badge {
+  .admin-nav-right { display: flex; align-items: center; gap: 24px; }
+  .admin-nav a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .admin-nav a:hover { color: #fff; }
+  .btn-logout {
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: var(--red);
-    color: #fff;
-    padding: 3px 10px;
-    margin-left: 12px;
-  }
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .nav-link {
-    font-family: 'Poppins', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    cursor: pointer;
     background: none;
-    border: none;
-    transition: color 0.2s;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.7);
+    padding: 7px 18px;
+    cursor: pointer;
+    transition: all 0.18s;
   }
-  .nav-link:hover { color: var(--text); }
-  .tab-active { color: var(--text) !important; border-bottom: 2px solid var(--text); padding-bottom: 2px; }
+  .btn-logout:hover { border-color: #fff; color: #fff; }
 
-  /* STATS BAR */
   .stats-bar {
-    display: flex;
+    background: var(--white);
     border-bottom: 1px solid var(--border);
-    background: #fff;
+    padding: 20px 48px;
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
   }
-  .stat-item {
-    flex: 1;
-    padding: 28px 40px;
-    border-right: 1px solid var(--border);
-  }
-  .stat-item:last-child { border-right: none; }
   .stat-num {
     font-family: 'Oswald', sans-serif;
-    font-size: 44px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 1;
   }
-  .stat-num.pending-color { color: var(--red); }
-  .stat-num.approved-color { color: var(--green); }
   .stat-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .admin-content { padding: 40px 48px; }
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .section-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  /* MEMO REVIEW CARD */
+  .memo-list { display: flex; flex-direction: column; gap: 16px; }
+  .memo-review {
+    background: var(--white);
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 120px;
+  }
+  .memo-review-left { padding: 24px 28px; }
+  .memo-meta {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .color-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .memo-body {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .memo-date {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color: var(--light);
+    letter-spacing: 0.06em;
+  }
+  .memo-review-actions {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border);
+  }
+  .btn-approve, .btn-reject {
+    flex: 1;
+    border: none;
+    cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    margin-top: 6px;
+    transition: background 0.18s, color 0.18s;
   }
+  .btn-approve { background: var(--white); color: var(--green); border-bottom: 1px solid var(--border); }
+  .btn-approve:hover { background: var(--green); color: #fff; }
+  .btn-reject  { background: var(--white); color: var(--red); }
+  .btn-reject:hover  { background: var(--red);   color: #fff; }
 
-  /* MAIN */
-  .main {
-    padding: 40px 48px 80px;
-  }
-  .section-heading {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .count-tag {
+  .empty-msg {
+    text-align: center;
+    padding: 60px 24px;
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-muted);
-  }
-
-  /* PENDING CARDS */
-  .pending-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .pending-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-left: 5px solid #ddd;
-    padding: 0;
-    overflow: hidden;
-  }
-  .pending-card-body {
-    padding: 28px 28px 20px;
-  }
-  .pending-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-  .pending-to {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-  .mood-pill {
-    font-family: 'Poppins', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    color: #fff;
-    border-radius: 2px;
-  }
-  .company-tag {
-    font-family: 'Poppins', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--bg);
-    color: var(--text-muted);
-    padding: 3px 10px;
-    border: 1px solid var(--border);
-  }
-  .pending-time {
-    font-family: 'Poppins', sans-serif;
-    font-size: 10px;
-    color: var(--text-light);
-    margin-left: auto;
-    letter-spacing: 0.04em;
-  }
-  .pending-text {
-    font-family: 'Lato', sans-serif;
-    font-size: 16px;
-    line-height: 1.85;
-    color: #2a2a2a;
-  }
-  .pending-actions {
-    display: flex;
-    border-top: 1px solid var(--border);
-    background: var(--bg);
-  }
-  .action-btn {
-    flex: 1;
-    padding: 14px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 13px;
+    color: var(--muted);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
   }
-  .action-approve {
-    background: transparent;
-    color: var(--green);
-    border-right: 1px solid var(--border);
-  }
-  .action-approve:hover { background: var(--green); color: #fff; }
-  .action-reject {
-    background: transparent;
-    color: var(--text-muted);
-  }
-  .action-reject:hover { background: var(--red); color: #fff; }
-
-  /* EMPTY */
-  .empty-state {
-    text-align: center;
-    padding: 72px 24px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-light);
-  }
-  .empty-icon { font-size: 36px; margin-bottom: 16px; }
-
-  /* APPROVED LIST */
-  .approved-list {
-    display: none;
-  }
-  .approved-row {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-left: 5px solid #ddd;
-    padding: 20px 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    margin-bottom: 12px;
-  }
-  .approved-text {
-    flex: 1;
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #2a2a2a;
-  }
-  .approved-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .btn-remove {
-    font-family: 'Poppins', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    padding: 4px 10px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .btn-remove:hover { border-color: var(--red); color: var(--red); }
 
   /* TOAST */
   .toast {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
+    bottom: 28px; right: 28px;
     background: var(--text);
     color: #fff;
-    padding: 12px 24px;
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    z-index: 999;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 14px 24px;
     opacity: 0;
     transform: translateY(12px);
-    transition: all 0.25s ease;
+    transition: opacity 0.3s, transform 0.3s;
     pointer-events: none;
+    z-index: 999;
   }
   .toast.show { opacity: 1; transform: translateY(0); }
-  .toast.green { background: var(--green); }
-  .toast.red { background: var(--red); }
 
-  @media (max-width: 768px) {
-    nav { padding: 0 20px; }
-    .stats-bar { flex-wrap: wrap; }
-    .stat-item { flex: 1 1 50%; }
-    .main { padding: 24px 20px 48px; }
+  @media (max-width: 640px) {
+    .admin-nav, .stats-bar, .admin-content { padding-left: 20px; padding-right: 20px; }
+    .memo-review { grid-template-columns: 1fr; }
+    .memo-review-actions { flex-direction: row; border-left: none; border-top: 1px solid var(--border); }
+    .btn-approve { border-bottom: none; border-right: 1px solid var(--border); }
   }
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
+<!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
-    <div class="login-logo">UNSENT<span>.</span>MEMO</div>
-    <div class="login-sub">Admin Panel</div>
-    <label class="login-label">Enter admin PIN</label>
-    <input class="login-input" id="pinInput" type="password" placeholder="••••••••" maxlength="20"
-      onkeydown="if(event.key==='Enter') doLogin()" />
-    <div class="login-error" id="loginError">Incorrect PIN. Try again.</div>
-    <button class="btn-login" onclick="doLogin()">Enter</button>
+    <div class="login-title">Admin Login</div>
+    <div class="login-sub">Unsent Memo — Moderation Panel</div>
+    <input type="password" id="passwordInput" placeholder="Enter admin password"
+           onkeydown="if(event.key==='Enter') doLogin()" />
+    <button id="loginBtn" onclick="doLogin()">Log In</button>
+    <div class="login-error" id="loginError">Incorrect password. Try again.</div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
-<div class="dashboard" id="dashboard">
-  <nav>
-    <div style="display:flex;align-items:center;">
-      <a class="nav-logo" href="index.html">UNSENT<span>.</span>MEMO</a>
-      <span class="nav-badge" id="pendingBadge">0 pending</span>
-    </div>
-    <div class="nav-right">
-      <button class="nav-link tab-active" id="tabPendingBtn" onclick="switchTab('pending')">Pending</button>
-      <button class="nav-link" id="tabApprovedBtn" onclick="switchTab('approved')">Approved</button>
-      <button class="nav-link" onclick="doLogout()">Log out</button>
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <nav class="admin-nav">
+    <div class="admin-nav-title">Unsent Memo — Admin</div>
+    <div class="admin-nav-right">
+      <a href="index.html" target="_blank">View site</a>
+      <button class="btn-logout" onclick="doLogout()">Log Out</button>
     </div>
   </nav>
 
-  <!-- STATS -->
   <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-num pending-color" id="statPending">0</div>
-      <div class="stat-label">Awaiting Review</div>
+    <div>
+      <div class="stat-num" id="statPending">—</div>
+      <div class="stat-label">Awaiting review</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-num approved-color" id="statApproved">0</div>
+    <div>
+      <div class="stat-num" id="statApproved">—</div>
       <div class="stat-label">Published</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num" id="statTotal">0</div>
-      <div class="stat-label">Total Submitted</div>
     </div>
   </div>
 
-  <div class="main">
-    <!-- PENDING TAB -->
-    <div id="tabPending">
-      <div class="section-heading">
-        Awaiting Approval
-        <span class="count-tag" id="pendingCountTag"></span>
-      </div>
-      <div class="pending-list" id="pendingList"></div>
-    </div>
-
-    <!-- APPROVED TAB -->
-    <div class="approved-list" id="tabApproved">
-      <div class="section-heading">
-        Published Memos
-        <span class="count-tag" id="approvedCountTag"></span>
-      </div>
-      <div id="approvedList"></div>
+  <div class="admin-content">
+    <div class="section-title">Pending Memos</div>
+    <div class="section-sub">Approve to publish publicly. Reject to discard.</div>
+    <div class="memo-list" id="memoList">
+      <div class="empty-msg">Loading…</div>
     </div>
   </div>
 </div>
@@ -465,164 +318,154 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const ADMIN_PIN = 'memo2024';
+async function doLogin() {
+  const pw  = document.getElementById('passwordInput').value;
+  const btn = document.getElementById('loginBtn');
+  const err = document.getElementById('loginError');
+  if (!pw) return;
 
-const MOOD_COLORS = {
-  frustrated: '#c0392b',
-  grateful: '#27ae60',
-  'burnt-out': '#7f8c8d',
-  hopeful: '#e67e22',
-  proud: '#8e44ad',
-  conflicted: '#d35400',
-  relieved: '#2980b9',
-  resigned: '#95a5a6'
-};
+  btn.disabled    = true;
+  btn.textContent = 'Logging in…';
+  err.style.display = 'none';
 
-function doLogin() {
-  const pin = document.getElementById('pinInput').value;
-  if (pin === ADMIN_PIN) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    localStorage.setItem('unsent_admin_session', '1');
-    loadDashboard();
-  } else {
-    const input = document.getElementById('pinInput');
-    const err = document.getElementById('loginError');
-    input.classList.add('error');
+  try {
+    const res  = await fetch('api/login.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      showPanel();
+    } else {
+      err.style.display = 'block';
+      btn.disabled    = false;
+      btn.textContent = 'Log In';
+    }
+  } catch (e) {
+    err.textContent   = 'Could not connect to server.';
     err.style.display = 'block';
-    setTimeout(() => { input.classList.remove('error'); input.value = ''; }, 1200);
+    btn.disabled    = false;
+    btn.textContent = 'Log In';
   }
 }
 
-function doLogout() {
-  localStorage.removeItem('unsent_admin_session');
-  location.reload();
+async function doLogout() {
+  await fetch('api/logout.php', { method: 'POST' });
+  document.getElementById('adminPanel').style.display  = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('passwordInput').value = '';
 }
 
-function getPending() { return JSON.parse(localStorage.getItem('unsent_pending') || '[]'); }
-function getApproved() { return JSON.parse(localStorage.getItem('unsent_approved') || '[]'); }
-
-function loadDashboard() {
-  const pending = getPending();
-  const approved = getApproved();
-
-  document.getElementById('statPending').textContent = pending.length;
-  document.getElementById('statApproved').textContent = approved.length;
-  document.getElementById('statTotal').textContent = pending.length + approved.length;
-  document.getElementById('pendingBadge').textContent = `${pending.length} pending`;
-  document.getElementById('pendingCountTag').textContent = `${pending.length} memo${pending.length !== 1 ? 's' : ''}`;
-  document.getElementById('approvedCountTag').textContent = `${approved.length} memo${approved.length !== 1 ? 's' : ''}`;
-
-  renderPending(pending);
-  renderApproved(approved);
+function showPanel() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display  = 'block';
+  loadStats();
+  loadPending();
 }
 
-function renderPending(pending) {
-  const list = document.getElementById('pendingList');
-  if (!pending.length) {
-    list.innerHTML = `<div class="empty-state"><div class="empty-icon">&#10003;</div>No memos waiting for review.</div>`;
-    return;
-  }
-  list.innerHTML = pending.map((m, i) => {
-    const color = MOOD_COLORS[m.mood] || '#aaa';
-    const date = m.submittedAt ? new Date(m.submittedAt).toLocaleDateString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) : '';
-    return `<div class="pending-card" id="pcard-${m.id}" style="border-left-color:${color}">
-      <div class="pending-card-body">
-        <div class="pending-meta">
-          <div class="pending-to">To: ${escHtml(m.to)}</div>
-          <div class="mood-pill" style="background:${color}">${m.mood}</div>
-          <div class="company-tag">${escHtml(m.company || 'Anonymous')}</div>
-          <div class="pending-time">${date}</div>
+async function checkSession() {
+  try {
+    const res = await fetch('api/pending.php');
+    if (res.ok) showPanel();
+  } catch (e) {}
+}
+
+async function loadStats() {
+  try {
+    const data = await (await fetch('api/stats.php')).json();
+    document.getElementById('statPending').textContent  = data.pending  ?? '—';
+    document.getElementById('statApproved').textContent = data.approved ?? '—';
+  } catch (e) {}
+}
+
+async function loadPending() {
+  const list = document.getElementById('memoList');
+  list.innerHTML = '<div class="empty-msg">Loading…</div>';
+  try {
+    const res  = await fetch('api/pending.php');
+    if (res.status === 401) { doLogout(); return; }
+    const data = await res.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      list.innerHTML = '<div class="empty-msg">No pending memos — you\'re all caught up ✓</div>';
+      return;
+    }
+
+    list.innerHTML = data.map(m => `
+      <div class="memo-review" id="memo-${m.id}">
+        <div class="memo-review-left">
+          <div class="memo-meta">
+            <span>To: <strong>${escHtml(m.to)}</strong></span>
+            <span>${escHtml(m.company)}</span>
+            <span><span class="color-dot" style="background:${escHtml(m.color)}"></span>${escHtml(m.color)}</span>
+          </div>
+          <div class="memo-body">${escHtml(m.text)}</div>
+          <div class="memo-date">Submitted: ${new Date(m.submitted_at).toLocaleString()}</div>
         </div>
-        <div class="pending-text">${escHtml(m.text)}</div>
+        <div class="memo-review-actions">
+          <button class="btn-approve" onclick="act(${m.id},'approve')">✓ Approve</button>
+          <button class="btn-reject"  onclick="act(${m.id},'reject')">✕ Reject</button>
+        </div>
       </div>
-      <div class="pending-actions">
-        <button class="action-btn action-approve" onclick="approve(${m.id})">&#10003; Approve &amp; Publish</button>
-        <button class="action-btn action-reject" onclick="reject(${m.id})">&#10005; Reject</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function renderApproved(approved) {
-  const list = document.getElementById('approvedList');
-  if (!approved.length) {
-    list.innerHTML = `<div class="empty-state"><div class="empty-icon">&#128197;</div>No memos published yet.</div>`;
-    return;
+    `).join('');
+  } catch (e) {
+    list.innerHTML = '<div class="empty-msg">Error loading memos.</div>';
   }
-  list.innerHTML = approved.map((m, i) => {
-    const color = MOOD_COLORS[m.mood] || '#aaa';
-    return `<div class="approved-row" style="border-left-color:${color}">
-      <div class="approved-text">${escHtml(m.text)}</div>
-      <div class="approved-meta">
-        <div class="mood-pill" style="background:${color}">${m.mood}</div>
-        <div class="company-tag">${escHtml(m.company || 'Anonymous')}</div>
-        <button class="btn-remove" onclick="removeApproved(${i})">Remove</button>
-      </div>
-    </div>`;
-  }).join('');
 }
 
-function approve(id) {
-  let pending = getPending();
-  const idx = pending.findIndex(m => m.id === id);
-  if (idx === -1) return;
-  const memo = pending.splice(idx, 1)[0];
-  localStorage.setItem('unsent_pending', JSON.stringify(pending));
+async function act(id, type) {
+  const el   = document.getElementById(`memo-${id}`);
+  const btns = el.querySelectorAll('button');
+  btns.forEach(b => b.disabled = true);
 
-  const approved = getApproved();
-  const { id: _id, submittedAt: _s, ...clean } = memo;
-  approved.unshift(clean);
-  localStorage.setItem('unsent_approved', JSON.stringify(approved));
+  try {
+    const res  = await fetch(`api/${type}.php`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
+    const data = await res.json();
 
-  showToast('Published to archive', 'green');
-  loadDashboard();
+    if (res.ok && data.success) {
+      el.style.transition = 'opacity 0.3s, transform 0.3s';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateX(20px)';
+      setTimeout(() => {
+        el.remove();
+        const list = document.getElementById('memoList');
+        if (list.children.length === 0) {
+          list.innerHTML = '<div class="empty-msg">No pending memos — you\'re all caught up ✓</div>';
+        }
+      }, 320);
+      showToast(type === 'approve' ? '✓ Published to archive.' : '✕ Memo rejected.');
+      loadStats();
+    } else {
+      showToast(data.error || 'Something went wrong.');
+      btns.forEach(b => b.disabled = false);
+    }
+  } catch (e) {
+    showToast('Network error.');
+    btns.forEach(b => b.disabled = false);
+  }
 }
 
-function reject(id) {
-  let pending = getPending();
-  const idx = pending.findIndex(m => m.id === id);
-  if (idx === -1) return;
-  pending.splice(idx, 1);
-  localStorage.setItem('unsent_pending', JSON.stringify(pending));
-  showToast('Memo rejected', 'red');
-  loadDashboard();
-}
-
-function removeApproved(idx) {
-  if (!confirm('Remove this memo from the archive?')) return;
-  const approved = getApproved();
-  approved.splice(idx, 1);
-  localStorage.setItem('unsent_approved', JSON.stringify(approved));
-  showToast('Removed from archive', 'red');
-  loadDashboard();
-}
-
-function switchTab(tab) {
-  const isPending = tab === 'pending';
-  document.getElementById('tabPending').style.display = isPending ? 'block' : 'none';
-  document.getElementById('tabApproved').style.display = isPending ? 'none' : 'block';
-  document.getElementById('tabPendingBtn').classList.toggle('tab-active', isPending);
-  document.getElementById('tabApprovedBtn').classList.toggle('tab-active', !isPending);
-}
-
-function showToast(msg, type) {
+let toastTimer;
+function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = `toast show ${type || ''}`;
-  setTimeout(() => t.className = 'toast', 2500);
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 function escHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// Auto-login if session exists
-if (localStorage.getItem('unsent_admin_session') === '1') {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
-  loadDashboard();
-}
+checkSession();
 </script>
 </body>
 </html>

@@ -518,7 +518,7 @@ function updateCount() {
   el.classList.toggle('warn', len > 540);
 }
 
-function submitMemo() {
+async function submitMemo() {
   const text    = document.getElementById('msgText').value.trim();
   const to      = document.getElementById('msgTo').value.trim();
   const company = document.getElementById('msgCompany').value.trim();
@@ -537,19 +537,32 @@ function submitMemo() {
   }
   if (!valid) return;
 
-  const pending = JSON.parse(localStorage.getItem('unsent_pending') || '[]');
-  pending.push({
-    id: Date.now(),
-    text,
-    to,
-    company: company || 'Anonymous',
-    color: selectedColor,
-    submittedAt: new Date().toISOString()
-  });
-  localStorage.setItem('unsent_pending', JSON.stringify(pending));
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
 
-  document.getElementById('formWrap').style.display   = 'none';
-  document.getElementById('successState').style.display = 'block';
+  try {
+    const res  = await fetch('api/submit.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, to, company: company || 'Anonymous', color: selectedColor })
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      btn.disabled    = false;
+      btn.textContent = 'Send it into the void';
+      alert(data.error || 'Something went wrong. Please try again.');
+      return;
+    }
+
+    document.getElementById('formWrap').style.display    = 'none';
+    document.getElementById('successState').style.display = 'block';
+  } catch (e) {
+    btn.disabled    = false;
+    btn.textContent = 'Send it into the void';
+    alert('Could not connect to the server. Check your internet connection.');
+  }
 }
 
 function escHtml(str) {

@@ -400,31 +400,6 @@
 </div>
 
 <script>
-const DEFAULT_COLORS = [
-  '#1438BD','#C1121F','#2D6A4F','#6B2D8B',
-  '#2B2D42','#E76F51','#0A7373','#7D2239',
-  '#1A1A1A','#386641'
-];
-
-const SEED = [
-  { text:"You asked for feedback but punished everyone who gave it. I stopped being honest after the third person got reassigned.", to:"My Manager", company:"Acme Corp", color:"#C1121F" },
-  { text:"You went to bat for me when I didn't even know I needed it. I got that promotion because you said something in a room I wasn't in. Thank you.", to:"My Manager", company:"Stripe", color:"#2D6A4F" },
-  { text:"I haven't taken a real day off in nine months. I reply to Slack on weekends. I wake up anxious. And you just sent a 7am Monday invite.", to:"HR", company:"Meta", color:"#2B2D42" },
-  { text:"Every idea I brought to you ended up in your mouth in the next all-hands. No credit. No mention. I watched you get promoted on the back of my work.", to:"The CEO", company:"Acme Corp", color:"#1438BD" },
-  { text:"I don't think you realize how much calmer everyone is when you're out of the office. That's not a compliment.", to:"My Manager", company:"Goldman Sachs", color:"#6B2D8B" },
-  { text:"When I was falling apart after my dad died, you covered for me without making it a big deal. You just said 'take what you need.' I've never forgotten that.", to:"Sarah from Finance", company:"Shopify", color:"#0A7373" },
-  { text:"I've been quietly applying for other jobs for four months. I feel guilty but mostly I feel relieved every time I get a callback.", to:"Myself", company:"McKinsey", color:"#7D2239" },
-  { text:"I still think the idea I pitched in Q2 was better than what we actually built. The data proved it six months later. Nobody ever said anything.", to:"My Team", company:"Spotify", color:"#1438BD" },
-  { text:"I cried in the bathroom after that feedback session. Not because you were wrong. Because you were right and I wasn't ready to hear it in front of everyone.", to:"My Manager", company:"Deloitte", color:"#E76F51" },
-  { text:"You gave me a shot when my CV shouldn't have made the shortlist. I've been trying to justify that decision every single day since.", to:"The CEO", company:"Stripe", color:"#386641" },
-  { text:"The 'open door policy' was never open. Every time someone walked through it, something bad happened to them. That door was a trap.", to:"HR", company:"Uber", color:"#C1121F" },
-  { text:"I told myself I'd speak up in the next meeting. I've told myself that 47 times. I'm still waiting for the right moment.", to:"Myself", company:"Amazon", color:"#2B2D42" },
-  { text:"You quietly mentored me for two years without calling it that. You answered my dumb questions at 9pm. You made me a better engineer.", to:"David K.", company:"Notion", color:"#0A7373" },
-  { text:"The culture deck says we value work-life balance. The culture deck is fiction.", to:"The CEO", company:"WeWork", color:"#6B2D8B" },
-  { text:"I actually love this job. I don't say that because I'm afraid it'll disappear. I come home excited. I don't take that for granted.", to:"Myself", company:"Basecamp", color:"#2D6A4F" },
-  { text:"You fired someone two days before their stock vested. Everyone saw it. Nobody believed it was a coincidence. We just couldn't prove it.", to:"The CEO", company:"Acme Corp", color:"#7D2239" }
-];
-
 let allMessages = [];
 
 function getTextColor(hex) {
@@ -435,30 +410,31 @@ function getTextColor(hex) {
   return luminance > 0.45 ? '#1a1a1a' : '#ffffff';
 }
 
-function initMessages() {
-  if (!localStorage.getItem('unsent_seeded_v2')) {
-    localStorage.setItem('unsent_approved', JSON.stringify(SEED));
-    localStorage.setItem('unsent_seeded_v2', '1');
+async function loadMemos() {
+  try {
+    const res  = await fetch('api/memos.php');
+    const data = await res.json();
+    allMessages = Array.isArray(data) ? data : [];
+  } catch (e) {
+    allMessages = [];
+    document.getElementById('notesGrid').innerHTML =
+      '<div class="empty-state" style="display:block">Could not load memos. Check that the backend is set up.</div>';
+    return;
   }
-  allMessages = JSON.parse(localStorage.getItem('unsent_approved') || '[]');
-  // Migrate old entries without color
-  allMessages = allMessages.map((m, i) => ({
-    ...m,
-    color: m.color || DEFAULT_COLORS[i % DEFAULT_COLORS.length]
-  }));
+  render();
 }
 
 function render() {
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
-  const grid = document.getElementById('notesGrid');
+  const grid  = document.getElementById('notesGrid');
   const empty = document.getElementById('emptyState');
 
-  const filtered = allMessages.filter(m => {
-    return !query ||
-      (m.company || '').toLowerCase().includes(query) ||
-      (m.to || '').toLowerCase().includes(query) ||
-      (m.text || '').toLowerCase().includes(query);
-  });
+  const filtered = allMessages.filter(m =>
+    !query ||
+    (m.company || '').toLowerCase().includes(query) ||
+    (m.to      || '').toLowerCase().includes(query) ||
+    (m.text    || '').toLowerCase().includes(query)
+  );
 
   document.getElementById('visibleCount').textContent =
     `${filtered.length} memo${filtered.length !== 1 ? 's' : ''}`;
@@ -472,11 +448,10 @@ function render() {
   empty.style.display = 'none';
 
   grid.innerHTML = filtered.map((m, i) => {
-    const bg = m.color || DEFAULT_COLORS[i % DEFAULT_COLORS.length];
-    const fg = getTextColor(bg);
-    const idx = allMessages.indexOf(m);
+    const bg      = m.color || '#1A1A1A';
+    const fg      = getTextColor(bg);
     const preview = m.text.length > 280 ? m.text.slice(0, 280) + '…' : m.text;
-    return `<div class="note-card" style="background:${bg};color:${fg}" onclick="openModal(${idx})">
+    return `<div class="note-card" style="background:${bg};color:${fg}" onclick="openModal(${i})">
       <div class="note-to">To: ${escHtml(m.to)}</div>
       <div class="note-text">${escHtml(preview)}</div>
       <div class="note-footer">
@@ -487,15 +462,15 @@ function render() {
   }).join('');
 }
 
-function openModal(idx) {
-  const m = allMessages[idx];
+function openModal(i) {
+  const m  = allMessages[i];
   const bg = m.color || '#1a1a1a';
   const fg = getTextColor(bg);
   const modal = document.getElementById('modal');
   modal.style.background = bg;
   modal.style.color = fg;
-  document.getElementById('mTo').textContent = `To: ${m.to}`;
-  document.getElementById('mText').textContent = m.text;
+  document.getElementById('mTo').textContent      = `To: ${m.to}`;
+  document.getElementById('mText').textContent    = m.text;
   document.getElementById('mCompany').textContent = m.company || 'Anonymous';
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -520,8 +495,7 @@ function escHtml(str) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-initMessages();
-render();
+loadMemos();
 </script>
 </body>
 </html>
