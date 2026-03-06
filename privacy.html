@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Unsent Memo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Lato:wght@300;400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f6f3;
+    --border: #e8e8e4;
+    --text: #1a1a1a;
+    --text-muted: #999999;
+    --text-light: #cccccc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 68px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo-img { height: 44px; width: auto; display: block; }
+  .logo-fallback {
+    display: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .nav-right { display: flex; align-items: center; gap: 32px; }
+  .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--text); }
+  .btn-nav {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--text);
+    color: #ffffff;
+    padding: 11px 28px;
+    text-decoration: none;
+    transition: background 0.18s;
+  }
+  .btn-nav:hover { background: #333; }
+
+  /* PAGE */
+  .page-header {
+    padding: 72px 48px 48px;
+    border-bottom: 2px solid var(--text);
+  }
+  .page-header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+  .page-header .last-updated {
+    margin-top: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .privacy-body {
+    max-width: 760px;
+    padding: 64px 48px 100px;
+  }
+  .privacy-body section {
+    margin-bottom: 52px;
+  }
+  .privacy-body h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  .privacy-body p {
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    line-height: 1.85;
+    color: #333;
+    margin-bottom: 14px;
+  }
+  .privacy-body p:last-child { margin-bottom: 0; }
+  .privacy-body a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .privacy-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .privacy-body ul li {
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    line-height: 1.85;
+    color: #333;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .privacy-body ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-light);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 28px 48px;
+    border-top: 2px solid var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .footer-copy {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  .footer-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--text); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .page-header { padding: 48px 20px 36px; }
+    .privacy-body { padding: 40px 20px 72px; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="logo.png" alt="Unsent Memo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-fallback">UNSENT MEMO</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="index.html">Archive</a>
+    <a class="nav-link" href="privacy.html">Privacy</a>
+    <a class="btn-nav" href="submit.html">Submit</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Privacy Policy</h1>
+  <p class="last-updated">Last updated: March 2026</p>
+</div>
+
+<div class="privacy-body">
+
+  <section>
+    <h2>Overview</h2>
+    <p>
+      Unsent Memo is a space for anonymous professional confessions. We take your privacy seriously. This page explains what we collect, how we use it, and your rights.
+    </p>
+  </section>
+
+  <section>
+    <h2>What We Collect</h2>
+    <ul>
+      <li>The text of memos you submit (published anonymously)</li>
+      <li>The recipient label and company name you provide</li>
+      <li>Basic usage data (page views, no personal identifiers)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What We Don't Collect</h2>
+    <ul>
+      <li>Your name or email address</li>
+      <li>Your IP address stored against your submission</li>
+      <li>Any account information — there are no accounts</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How Your Memo Is Used</h2>
+    <p>
+      Submissions are reviewed before publishing. Once approved, your memo appears on the homepage anonymously. We do not sell, share, or monetise your submissions in any way.
+    </p>
+  </section>
+
+  <section>
+    <h2>Cookies</h2>
+    <p>
+      This site uses no tracking cookies. We do not use Google Analytics or any third-party analytics that identify individual visitors.
+    </p>
+  </section>
+
+  <section>
+    <h2>Data Retention</h2>
+    <p>
+      Published memos are stored indefinitely unless you request removal. To request that a memo be taken down, contact us below.
+    </p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy or removal requests: <a href="mailto:hello@unsentmemo.com">hello@unsentmemo.com</a>
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  <span class="footer-copy">© Muskan Singh (2026)</span>
+  <a class="footer-link" href="privacy.html">Privacy policy</a>
+</footer>
+
+</body>
+</html>
