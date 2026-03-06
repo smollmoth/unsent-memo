@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit a Memo — Unsent Memo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f6f3;
+    --border: #e8e8e4;
+    --text: #1a1a1a;
+    --text-muted: #999999;
+    --text-light: #cccccc;
+    --red: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* NAV */
+  nav {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    height: 68px;
+    flex-shrink: 0;
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--text); }
+
+  /* PAGE CONTENT */
+  .page {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* LEFT PANEL */
+  .left-panel {
+    width: 420px;
+    flex-shrink: 0;
+    background: var(--text);
+    color: #ffffff;
+    padding: 72px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .left-tag {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 24px;
+  }
+  .left-panel h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(52px, 5vw, 80px);
+    font-weight: 700;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .left-panel h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .left-desc {
+    margin-top: 32px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.5);
+  }
+  .rules {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+  }
+  .rule-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .left-bottom {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* RIGHT PANEL - FORM */
+  .right-panel {
+    flex: 1;
+    padding: 72px 64px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .form-heading {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .form-subheading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .form-label {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .form-label span {
+    font-weight: 400;
+    color: var(--text-light);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+  textarea, input[type="text"], select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  textarea:focus, input[type="text"]:focus, select:focus {
+    border-color: var(--text);
+    background: #fff;
+  }
+  textarea {
+    min-height: 160px;
+    resize: vertical;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  textarea::placeholder, input::placeholder {
+    color: var(--text-light);
+    font-style: italic;
+  }
+  select { cursor: pointer; height: 50px; }
+  select option { background: #fff; }
+  .char-count {
+    text-align: right;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+  .char-count.warn { color: var(--red); }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .color-swatches {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.15s, border-color 0.15s;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .swatch:hover { transform: scale(1.08); }
+  .swatch.active {
+    border-color: var(--text);
+    transform: scale(1.12);
+  }
+  .swatch.active::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+  }
+  .form-actions {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .btn-submit {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--text);
+    color: #ffffff;
+    padding: 16px 40px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.18s;
+  }
+  .btn-submit:hover { background: #333; transform: translateY(-2px); }
+  .btn-submit:disabled { background: var(--text-light); cursor: not-allowed; transform: none; }
+  .anon-note {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .field-error {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    color: var(--red);
+    margin-top: 6px;
+    display: none;
+  }
+
+  /* SUCCESS STATE */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 40px 0;
+  }
+  .success-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
+  }
+  .success-state h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .success-state p {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 400px;
+    margin: 0 auto 32px;
+  }
+  .btn-secondary {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: all 0.18s;
+  }
+  .btn-secondary:hover { border-color: var(--text); color: var(--text); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .page { flex-direction: column; }
+    .left-panel { width: 100%; padding: 48px 24px; }
+    .right-panel { padding: 48px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">UNSENT<span>.</span>MEMO</a>
+  <a class="nav-link" href="index.html">&larr; Read the archive</a>
+</nav>
+
+<div class="page">
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div>
+      <div class="left-tag">// Submit a memo</div>
+      <h1>Say what<br>you<br><em>couldn't.</em></h1>
+      <p class="left-desc">No name. No email. No footprint. Write the message you've been holding onto. It lives here anonymously, with everyone else who held back.</p>
+      <div class="rules">
+        <div class="rule"><span class="rule-dot"></span>Zero personal data collected</div>
+        <div class="rule"><span class="rule-dot"></span>Reviewed before publishing</div>
+        <div class="rule"><span class="rule-dot"></span>No hate speech or personal attacks</div>
+        <div class="rule"><span class="rule-dot"></span>Company name used only for filtering</div>
+      </div>
+    </div>
+    <div class="left-bottom">Anonymous &middot; Permanent &middot; Real</div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div id="formWrap">
+      <div class="form-heading">Your memo</div>
+      <div class="form-subheading">Write it. It'll be reviewed and added to the archive.</div>
+
+      <div class="form-group">
+        <label class="form-label">The message</label>
+        <textarea id="msgText" placeholder="I never told you that..." maxlength="600" oninput="updateCount()"></textarea>
+        <div class="char-count" id="charCount">0 / 600</div>
+        <div class="field-error" id="msgError">Please write at least 20 characters.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">This is for <span>(person or role)</span></label>
+          <input type="text" id="msgTo" placeholder="e.g. My manager, Sarah, The CEO" maxlength="80" />
+          <div class="field-error" id="toError">Please fill this in.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company <span>(optional — helps with filtering)</span></label>
+          <input type="text" id="msgCompany" placeholder="e.g. Google, Acme Corp" maxlength="80" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mood behind it</label>
+        <select id="msgMood">
+          <option value="frustrated">Frustrated</option>
+          <option value="grateful">Grateful</option>
+          <option value="burnt-out">Burnt out</option>
+          <option value="hopeful">Hopeful</option>
+          <option value="proud">Proud</option>
+          <option value="conflicted">Conflicted</option>
+          <option value="relieved">Relieved</option>
+          <option value="resigned">Resigned</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-submit" id="submitBtn" onclick="submitMemo()">Send it into the void</button>
+        <span class="anon-note">Completely<br>anonymous.</span>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">&#9993;</div>
+      <h2>Memo received.</h2>
+      <p>Your message is in the queue. Once it's reviewed and approved, it'll appear in the archive anonymously — permanently.</p>
+      <a class="btn-secondary" href="index.html">Read the archive</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateCount() {
+  const len = document.getElementById('msgText').value.length;
+  const el = document.getElementById('charCount');
+  el.textContent = `${len} / 600`;
+  el.classList.toggle('warn', len > 540);
+}
+
+function submitMemo() {
+  const text = document.getElementById('msgText').value.trim();
+  const to = document.getElementById('msgTo').value.trim();
+  const company = document.getElementById('msgCompany').value.trim();
+  const mood = document.getElementById('msgMood').value;
+
+  let valid = true;
+
+  document.getElementById('msgError').style.display = 'none';
+  document.getElementById('toError').style.display = 'none';
+
+  if (text.length < 20) {
+    document.getElementById('msgError').style.display = 'block';
+    valid = false;
+  }
+  if (!to) {
+    document.getElementById('toError').style.display = 'block';
+    valid = false;
+  }
+  if (!valid) return;
+
+  const pending = JSON.parse(localStorage.getItem('unsent_pending') || '[]');
+  pending.push({
+    id: Date.now(),
+    text,
+    to,
+    company: company || 'Anonymous Company',
+    mood,
+    submittedAt: new Date().toISOString()
+  });
+  localStorage.setItem('unsent_pending', JSON.stringify(pending));
+
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('successState').style.display = 'block';
+}
+</script>
+</body>
+</html>
