@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — Unsent Memo</title>
+<title>Legal — Unsent Memo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Lato:wght@300;400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -78,7 +78,7 @@
   }
   .btn-nav:hover { background: #333; }
 
-  /* PAGE */
+  /* PAGE HEADER */
   .page-header {
     padding: 72px 48px 48px;
     border-bottom: 2px solid var(--text);
@@ -89,51 +89,100 @@
     font-weight: 700;
     text-transform: uppercase;
     line-height: 0.95;
+    margin-bottom: 20px;
   }
-  .page-header .last-updated {
-    margin-top: 16px;
+  .doc-nav {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .doc-nav a {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .doc-nav a:hover { color: var(--text); }
+  .doc-nav span {
+    color: var(--text-light);
+    font-size: 11px;
+  }
+
+  /* LAYOUT */
+  .legal-wrap {
+    max-width: 760px;
+    padding: 0 48px 100px;
+  }
+
+  /* DOCUMENT SECTION */
+  .doc-section {
+    padding: 64px 0 56px;
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-section:last-child { border-bottom: none; }
+
+  .doc-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .doc-effective {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
     color: var(--text-muted);
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    margin-bottom: 40px;
   }
 
-  .privacy-body {
-    max-width: 760px;
-    padding: 64px 48px 100px;
+  .doc-intro {
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    line-height: 1.85;
+    color: #444;
+    margin-bottom: 40px;
   }
-  .privacy-body section {
-    margin-bottom: 52px;
+
+  .doc-block {
+    margin-bottom: 40px;
   }
-  .privacy-body h2 {
+  .doc-block h3 {
     font-family: 'Poppins', sans-serif;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    margin-bottom: 14px;
     padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
   }
-  .privacy-body p {
+  .doc-block p {
     font-family: 'Lato', sans-serif;
     font-size: 17px;
     line-height: 1.85;
     color: #333;
     margin-bottom: 14px;
   }
-  .privacy-body p:last-child { margin-bottom: 0; }
-  .privacy-body a {
+  .doc-block p:last-child { margin-bottom: 0; }
+  .doc-block a {
     color: var(--text);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  .privacy-body ul {
+  .doc-block ul {
     list-style: none;
     padding: 0;
+    margin-top: 4px;
   }
-  .privacy-body ul li {
+  .doc-block ul li {
     font-family: 'Lato', sans-serif;
     font-size: 17px;
     line-height: 1.85;
@@ -142,7 +191,7 @@
     position: relative;
     margin-bottom: 8px;
   }
-  .privacy-body ul li::before {
+  .doc-block ul li::before {
     content: '—';
     position: absolute;
     left: 0;
@@ -178,7 +227,7 @@
   @media (max-width: 768px) {
     nav { padding: 0 20px; }
     .page-header { padding: 48px 20px 36px; }
-    .privacy-body { padding: 40px 20px 72px; }
+    .legal-wrap { padding: 0 20px 72px; }
     footer { padding: 24px 20px; }
   }
 </style>
@@ -198,64 +247,210 @@
 </nav>
 
 <div class="page-header">
-  <h1>Privacy Policy</h1>
-  <p class="last-updated">Last updated: March 2026</p>
+  <h1>Legal Documents</h1>
+  <nav class="doc-nav">
+    <a href="#terms-submission">Terms of Submission</a>
+    <span>·</span>
+    <a href="#terms-use">Terms of Use</a>
+    <span>·</span>
+    <a href="#privacy-policy">Privacy Policy</a>
+  </nav>
 </div>
 
-<div class="privacy-body">
+<div class="legal-wrap">
 
-  <section>
-    <h2>Overview</h2>
-    <p>
-      Unsent Memo is a space for anonymous professional confessions. We take your privacy seriously. This page explains what we collect, how we use it, and your rights.
-    </p>
-  </section>
+  <!-- TERMS OF SUBMISSION -->
+  <div class="doc-section" id="terms-submission">
+    <div class="doc-title">Terms of Submission</div>
+    <div class="doc-effective">Effective Date: March 2025</div>
+    <p class="doc-intro">By submitting content to Unsent Memo, you acknowledge and agree to the following terms.</p>
 
-  <section>
-    <h2>What We Collect</h2>
-    <ul>
-      <li>The text of memos you submit (published anonymously)</li>
-      <li>The recipient label and company name you provide</li>
-      <li>Basic usage data (page views, no personal identifiers)</li>
-    </ul>
-  </section>
+    <div class="doc-block">
+      <h3>1. Submission and Publication</h3>
+      <p>When you submit content to Unsent Memo:</p>
+      <ul>
+        <li>Your submission may be reviewed and published in the Unsent Memo archive.</li>
+        <li>Any submission that does not violate the terms listed below is eligible for approval.</li>
+        <li>We do our best to review each submission, but due to volume, we cannot guarantee your submission will be reviewed or published.</li>
+        <li>Any content you submit can be seen and searched by anyone on the internet once published.</li>
+        <li>Submissions are permanent. There is no way to delete a submission from Unsent Memo or from the internet after it has been published.</li>
+        <li>You may submit a maximum of 1 post per 24-hour period.</li>
+        <li>Submissions must be in English.</li>
+      </ul>
+    </div>
 
-  <section>
-    <h2>What We Don't Collect</h2>
-    <ul>
-      <li>Your name or email address</li>
-      <li>Your IP address stored against your submission</li>
-      <li>Any account information — there are no accounts</li>
-    </ul>
-  </section>
+    <div class="doc-block">
+      <h3>2. Content Ownership and License</h3>
+      <p>You retain ownership of any content you submit. By submitting content to Unsent Memo, you grant us a non-exclusive, worldwide, royalty-free, sublicensable, and transferable license to use, store, reproduce, publish, display, distribute, modify, and create derivative works of your content across any media or platform, now or in the future.</p>
+      <p>You represent and warrant that:</p>
+      <ul>
+        <li>You have all rights, licenses, and permissions necessary to submit the content.</li>
+        <li>Your content does not infringe any third-party intellectual property, copyright, or trademark rights.</li>
+        <li>You agree to indemnify and hold harmless Unsent Memo and its affiliates from any claims, damages, or costs arising from your submitted content.</li>
+      </ul>
+    </div>
 
-  <section>
-    <h2>How Your Memo Is Used</h2>
-    <p>
-      Submissions are reviewed before publishing. Once approved, your memo appears on the homepage anonymously. We do not sell, share, or monetise your submissions in any way.
-    </p>
-  </section>
+    <div class="doc-block">
+      <h3>3. Prohibited Content</h3>
+      <p>Submissions must not contain any of the following:</p>
+      <ul>
+        <li>Identifying information about any individual, including real names, usernames, phone numbers, addresses, dates, links, workplace details, or any other information that could identify a real person (this is commonly referred to as doxxing).</li>
+        <li>Any content that is unlawful, defamatory, libelous, threatening, obscene, pornographic, harassing, or hateful, including language that discriminates on the basis of ethnicity, national origin, race, religion, disability, sexual orientation, gender identity, or physical appearance.</li>
+        <li>Hate speech, bullying, or any language intended to harm, intimidate, threaten, or coerce any individual or group.</li>
+        <li>Slurs or derogatory language of any kind.</li>
+        <li>Any statement that identifies you as the author of the post.</li>
+        <li>Duplicate submissions.</li>
+      </ul>
+      <p>We reserve the right to reject or remove any submission that violates these terms, at our sole discretion.</p>
+    </div>
+  </div>
 
-  <section>
-    <h2>Cookies</h2>
-    <p>
-      This site uses no tracking cookies. We do not use Google Analytics or any third-party analytics that identify individual visitors.
-    </p>
-  </section>
+  <!-- TERMS OF USE -->
+  <div class="doc-section" id="terms-use">
+    <div class="doc-title">Terms of Use</div>
+    <div class="doc-effective">Effective Date: March 2025</div>
+    <p class="doc-intro">Please read these Terms of Use carefully. By using Unsent Memo (the "Site" or "Service"), you agree to be bound by these terms. The Site is operated by Unsent Memo ("we," "us," or "our"). You may only use the Service if you are at least 18 years of age. If you are using the Service on behalf of a company or organization, you confirm that you are authorized to bind that entity to these Terms.</p>
 
-  <section>
-    <h2>Data Retention</h2>
-    <p>
-      Published memos are stored indefinitely unless you request removal. To request that a memo be taken down, contact us below.
-    </p>
-  </section>
+    <div class="doc-block">
+      <h3>1. Content You Submit</h3>
+      <p>You are solely responsible for any content you submit to the Site, and for ensuring it complies with all applicable laws and these Terms. Unsent Memo does not endorse, verify, or take responsibility for user-submitted content.</p>
+      <p>You understand that by using the Service, you may encounter content submitted by others that is offensive, inaccurate, or otherwise inappropriate. We are not responsible for such content and we may, but are not obligated to, review or remove it.</p>
+      <p>We reserve the right to remove any content that violates these Terms or applicable law, including content that infringes copyright, constitutes harassment, or is otherwise unlawful.</p>
+    </div>
 
-  <section>
-    <h2>Contact</h2>
-    <p>
-      Questions about this policy or removal requests: <a href="mailto:hello@unsentmemo.com">hello@unsentmemo.com</a>
-    </p>
-  </section>
+    <div class="doc-block">
+      <h3>2. Using the Service</h3>
+      <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You must not:</p>
+      <ul>
+        <li>Attempt to access, tamper with, or probe any non-public area of the Site or its systems.</li>
+        <li>Use any automated means (bots, scrapers, scripts) to access or interact with the Service without our prior written consent.</li>
+        <li>Interfere with or disrupt the Service, including by sending spam, viruses, or excessive traffic.</li>
+        <li>Submit false, deceptive, or misleading content.</li>
+        <li>Use the Service in any way that could expose Unsent Memo to legal liability.</li>
+      </ul>
+      <p>We may stop or modify any part of the Service at any time without notice, and we reserve the right to set limits on use or remove content at our sole discretion.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>3. Your License to Use the Service</h3>
+      <p>We grant you a personal, non-exclusive, non-transferable, royalty-free license to access and use the Service for its intended purpose as described in these Terms. This license does not grant you any rights to use the Unsent Memo name, logo, or branding.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>4. Disclaimer of Warranties</h3>
+      <p>The Service is provided "as is" and "as available" without any warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not guarantee that the Service will be uninterrupted, error-free, or free of harmful components.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>5. Limitation of Liability</h3>
+      <p>To the fullest extent permitted by applicable law, Unsent Memo and its affiliates will not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of or inability to use the Service, including any content submitted by users. Our total liability to you will not exceed INR 2,000 (or the equivalent in any other currency) in any circumstance.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>6. Governing Law</h3>
+      <p>These Terms are governed by the laws of India. Any disputes arising from these Terms or your use of the Service will be subject to the jurisdiction of the courts located in India. By using the Service, you consent to this jurisdiction.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>7. Changes to These Terms</h3>
+      <p>We may update these Terms from time to time. The most current version will always be available on the Site. Continued use of the Service after changes are published constitutes your acceptance of the updated Terms.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>8. Termination</h3>
+      <p>We reserve the right to restrict or block your access to the Service at any time, for any reason, without notice or liability. This includes cases where we believe you have violated these Terms or applicable law.</p>
+    </div>
+  </div>
+
+  <!-- PRIVACY POLICY -->
+  <div class="doc-section" id="privacy-policy">
+    <div class="doc-title">Privacy Policy</div>
+    <div class="doc-effective">Last updated: March 2025</div>
+    <p class="doc-intro">This Privacy Policy explains how Unsent Memo ("we," "us," or "our") collects, uses, stores, and shares information from visitors who interact with our website. Your privacy matters to us. Please read this carefully.<br><br>You are not required to provide any personal information to use the Service. Unsent Memo is designed for anonymous submissions. If you do not wish to have any information collected, simply do not use the Site.</p>
+
+    <div class="doc-block">
+      <h3>1. Information We Collect</h3>
+      <p>Since Unsent Memo does not require account creation or login, we do not collect personal information like your name, email address, or phone number by default.</p>
+      <p>We may automatically collect the following technical data when you visit the Site:</p>
+      <ul>
+        <li>IP address and approximate location (country or city level).</li>
+        <li>Browser type, device type, and operating system.</li>
+        <li>Pages visited, time spent on pages, and other usage data.</li>
+        <li>Referring website or source that brought you to the Site.</li>
+        <li>Cookies and similar tracking technologies (see Section 5).</li>
+      </ul>
+      <p>We also collect any content you voluntarily submit through the Site, including the text of your submission. Note that submitted content becomes part of the public archive and is not treated as private once published.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>2. How We Use This Information</h3>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Operate, maintain, and improve the Site and its features.</li>
+        <li>Monitor for spam, abuse, or violations of our Terms.</li>
+        <li>Analyze how visitors use the Site, so we can improve the experience.</li>
+        <li>Comply with applicable laws and legal obligations.</li>
+        <li>Protect the security and integrity of the Site.</li>
+      </ul>
+      <p>We do not sell your personal information. We do not use your data for targeted advertising.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>3. Data Storage and Retention</h3>
+      <p>We use third-party hosting and infrastructure services to store and process data. Data is stored securely and retained only as long as necessary for the purposes described in this policy, or as required by law.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>4. Data Sharing</h3>
+      <p>We do not sell or rent your data to any third party. We may share data in the following limited circumstances:</p>
+      <ul>
+        <li>Service providers who help us operate the Site (e.g., hosting, analytics). These providers are only permitted to use your data for the purposes we specify.</li>
+        <li>Law enforcement or government authorities, if required by law, court order, or to protect the safety or rights of others.</li>
+        <li>In connection with a merger, acquisition, or sale of assets, in which case user data may be transferred as part of that transaction.</li>
+      </ul>
+    </div>
+
+    <div class="doc-block">
+      <h3>5. Cookies and Tracking Technologies</h3>
+      <p>The Site may use cookies, pixels, and similar technologies to understand how visitors interact with the Site, measure performance, and improve the experience. You can control cookie settings through your browser. Disabling cookies may affect some functionality of the Site.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>6. User-Submitted Content</h3>
+      <p>Any content you submit to Unsent Memo is treated as public once published. Do not submit any content that includes personal information about yourself or others. We are not responsible for any personal information you voluntarily include in a submission.</p>
+      <p>Submissions are permanent. We do not have a process for removing published submissions upon request, except in cases of clear legal violations (such as copyright infringement). To report a legal concern, contact us at the address below.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>7. Children's Privacy</h3>
+      <p>The Service is not intended for anyone under the age of 18. We do not knowingly collect data from minors. If we become aware that a person under 18 has submitted content or data, we will take reasonable steps to delete it.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>8. Your Rights</h3>
+      <p>Depending on the laws applicable to you, you may have the right to request access to, correction of, or deletion of personal data we hold about you. To make such a request, contact us at the email address below. Note that because submissions are public and permanent, we may not be able to fulfill all deletion requests related to published content.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>9. Third-Party Links</h3>
+      <p>The Site may contain links to third-party websites. We are not responsible for the privacy practices or content of those sites. Please review their privacy policies separately.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>10. Changes to This Privacy Policy</h3>
+      <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of the Site after changes are published constitutes your acceptance.</p>
+    </div>
+
+    <div class="doc-block">
+      <h3>11. Contact Us</h3>
+      <p>If you have questions, concerns, or legal requests related to this Privacy Policy, please contact us at:</p>
+      <p>
+        Unsent Memo<br>
+        <a href="mailto:muskan@crackedcircle.com">muskan@crackedcircle.com</a><br>
+        <a href="https://www.unsentmemo.com">www.unsentmemo.com</a>
+      </p>
+    </div>
+  </div>
 
 </div>
 
