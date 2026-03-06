@@ -233,6 +233,11 @@
   .btn-approve:hover { background: var(--green); color: #fff; }
   .btn-reject  { background: var(--white); color: var(--red); }
   .btn-reject:hover  { background: var(--red);   color: #fff; }
+  .btn-delete  { background: var(--white); color: var(--red); border: none; cursor: pointer;
+    font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 0 20px;
+    transition: background 0.18s, color 0.18s; width: 100%; height: 100%; }
+  .btn-delete:hover  { background: var(--red); color: #fff; }
 
   .empty-msg {
     text-align: center;
@@ -312,6 +317,14 @@
     <div class="memo-list" id="memoList">
       <div class="empty-msg">Loading…</div>
     </div>
+
+    <div style="margin-top:56px;">
+      <div class="section-title">Published Memos</div>
+      <div class="section-sub">Delete to permanently remove from the public archive.</div>
+      <div class="memo-list" id="publishedList">
+        <div class="empty-msg">Loading…</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -362,6 +375,7 @@ function showPanel() {
   document.getElementById('adminPanel').style.display  = 'block';
   loadStats();
   loadPending();
+  loadPublished();
 }
 
 async function checkSession() {
@@ -463,6 +477,77 @@ function escHtml(str) {
   return String(str)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function loadPublished() {
+  const list = document.getElementById('publishedList');
+  list.innerHTML = '<div class="empty-msg">Loading…</div>';
+  try {
+    const res  = await fetch('api/approved.php');
+    if (res.status === 401) { doLogout(); return; }
+    const data = await res.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      list.innerHTML = '<div class="empty-msg">No published memos yet.</div>';
+      return;
+    }
+
+    list.innerHTML = data.map(m => `
+      <div class="memo-review" id="pub-${m.id}">
+        <div class="memo-review-left">
+          <div class="memo-meta">
+            <span>To: <strong>${escHtml(m.to)}</strong></span>
+            <span>${escHtml(m.company)}</span>
+            <span><span class="color-dot" style="background:${escHtml(m.color)}"></span>${escHtml(m.color)}</span>
+          </div>
+          <div class="memo-body">${escHtml(m.text)}</div>
+          <div class="memo-date">Published: ${new Date(m.submitted_at).toLocaleString()}</div>
+        </div>
+        <div class="memo-review-actions">
+          <button class="btn-delete" onclick="deleteMemo(${m.id})">✕ Delete</button>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) {
+    list.innerHTML = '<div class="empty-msg">Error loading published memos.</div>';
+  }
+}
+
+async function deleteMemo(id) {
+  if (!confirm('Permanently delete this memo from the public archive?')) return;
+  const el   = document.getElementById(`pub-${id}`);
+  const btns = el.querySelectorAll('button');
+  btns.forEach(b => b.disabled = true);
+
+  try {
+    const res  = await fetch('api/delete.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
+    });
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      el.style.transition = 'opacity 0.3s, transform 0.3s';
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateX(20px)';
+      setTimeout(() => {
+        el.remove();
+        const list = document.getElementById('publishedList');
+        if (list.children.length === 0) {
+          list.innerHTML = '<div class="empty-msg">No published memos yet.</div>';
+        }
+      }, 320);
+      showToast('✕ Memo deleted from archive.');
+      loadStats();
+    } else {
+      showToast(data.error || 'Something went wrong.');
+      btns.forEach(b => b.disabled = false);
+    }
+  } catch (e) {
+    showToast('Network error.');
+    btns.forEach(b => b.disabled = false);
+  }
 }
 
 checkSession();
